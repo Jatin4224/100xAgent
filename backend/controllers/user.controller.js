@@ -12,7 +12,7 @@ export const createUserController = async (req, res) => {
   try {
     const user = await userService.createUser(req.body);
 
-    const token = await User.generateJWT();
+    const token = await user.generateJWT();
 
     res.status(201).json({ user, token });
   } catch (error) {
