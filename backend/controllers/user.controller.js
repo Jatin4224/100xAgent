@@ -13,10 +13,10 @@ export const createUserController = async (req, res) => {
     const user = await userService.createUser(req.body);
 
     const token = await user.generateJWT();
-
-    res.status(201).json({ user, token });
+    delete user._doc.password;
+    return res.status(201).json({ user, token });
   } catch (error) {
-    res.status(400).send(error.message);
+    return res.status(400).send(error.message);
   }
 };
 
@@ -33,7 +33,7 @@ export const loginController = async (req, res) => {
     const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
-      res.status(401).json({
+      return res.status(401).json({
         errors: "Invalid credentials",
       });
     }
@@ -41,16 +41,16 @@ export const loginController = async (req, res) => {
     const isMatch = await user.isValidPassword(password);
 
     if (!isMatch) {
-      res.status(401).json({
+      return res.status(401).json({
         errors: "Invalid credentials",
       });
     }
 
     const token = await user.generateJWT();
-
-    res.status(200).json({ user, token });
+    delete user._doc.password;
+    return res.status(200).json({ user, token });
   } catch (error) {
-    res.status(400).send(error.message);
+    return res.status(400).send(error.message);
   }
 };
 
