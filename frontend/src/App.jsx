@@ -1,7 +1,11 @@
-import React from "react";
 import "./index.css";
+import AppRoutes from "./routes/AppRoutes";
 const App = () => {
-  return <div className="text-3xl font-bold underline">App</div>;
+  return (
+    <div>
+      <AppRoutes />
+    </div>
+  );
 };
 
 export default App;
