@@ -26,4 +26,10 @@ userRouter.get(
   authMiddlware.authUser,
   userController.profileController
 );
+
+userRouter.get(
+  "/logout",
+  authMiddlware.authUser,
+  userController.logoutController
+);
 export default userRouter;
