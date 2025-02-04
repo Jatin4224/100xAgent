@@ -1,6 +1,6 @@
 import projectModel from "../models/project.model.js";
 
-const createProject = async ({ name, userId }) => {
+export const createProjectService = async ({ name, userId }) => {
   try {
     if (!name) {
       throw new Error("Name is required");
@@ -19,5 +19,3 @@ const createProject = async ({ name, userId }) => {
     throw new Error(`Project creation failed: ${error.message}`);
   }
 };
-
-export default createProject;

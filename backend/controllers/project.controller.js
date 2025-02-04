@@ -1,6 +1,7 @@
 import projectModel from "../models/project.model.js";
 import userModel from "../models/user.model.js";
-import projectService from "../services/project.service.js";
+import { createProjectService } from "../services/project.service.js";
+
 import { validationResult } from "express-validator";
 
 export const createProject = async (req, res) => {
@@ -14,7 +15,7 @@ export const createProject = async (req, res) => {
     const loggedInUser = await userModel.findOne({ email: req.user.email });
     const userId = loggedInUser._id;
 
-    const newProject = await projectService.createProject({ name, userId });
+    const newProject = await createProjectService({ name, userId });
 
     res.status(201).json(newProject);
   } catch (err) {
