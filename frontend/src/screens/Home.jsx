@@ -15,9 +15,13 @@ const Home = () => {
       <div className="projects">
         <button
           onClick={() => setIsModalOpen(true)}
-          className="project p-4 border-4 border-slate-600 rounded-lg transform transition-transform duration-300 hover:scale-110"
+          className="project p-4 border-2 border-slate-600 rounded-lg transform transition-transform duration-300 hover:scale-110 flex gap-2 mt-2"
         >
-          <PiLinkBold />
+          <p className="font-bold text-slate-800 hover:transform-3d">
+            New Project
+          </p>
+
+          <PiLinkBold className="mt-1" />
         </button>
       </div>
 
