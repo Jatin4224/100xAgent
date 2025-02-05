@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { PiLinkBold } from "react-icons/pi";
-
+import axios from "../config/axios";
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [projectName, setProjectName] = useState(null);
@@ -8,6 +8,18 @@ const Home = () => {
   function createProject(event) {
     event.preventDefault();
     console.log("create project:", projectName);
+
+    axios
+      .post("/projects/create", {
+        name: projectName,
+      })
+      .then((res) => {
+        console.log(res);
+        setIsModalOpen(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   return (
