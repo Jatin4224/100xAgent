@@ -3,7 +3,7 @@ import { PiLinkBold } from "react-icons/pi";
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [projectName, setProjectName] = useState(""); // Fix: Define projectName state
+  const [projectName, setProjectName] = useState(null);
 
   function createProject(event) {
     event.preventDefault();
@@ -15,7 +15,7 @@ const Home = () => {
       <div className="projects">
         <button
           onClick={() => setIsModalOpen(true)}
-          className="project p-4 border-2 border-slate-600 rounded-lg transform transition-transform duration-300 hover:scale-110 flex gap-2 mt-2"
+          className="ackdrop-blur-lg shadow-2xl  project p-4 border-2 border-slate-600 rounded-lg transform transition-transform duration-300 hover:scale-110 flex gap-2 mt-2 "
         >
           <p className="font-bold text-slate-800 hover:transform-3d">
             New Project
