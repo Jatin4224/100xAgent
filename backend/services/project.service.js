@@ -1,3 +1,4 @@
+import Project from "../models/project.model.js";
 import projectModel from "../models/project.model.js";
 
 export const createProjectService = async ({ name, userId }) => {
@@ -18,4 +19,14 @@ export const createProjectService = async ({ name, userId }) => {
   } catch (error) {
     throw new Error(`Project creation failed: ${error.message}`);
   }
+};
+
+export const getAllProjectByUserId = async ({ userId }) => {
+  if (!userId) {
+    throw new Error("User ID is required");
+  }
+
+  const allUserProjects = await Project.find({ users: userId });
+
+  return allUserProjects;
 };
