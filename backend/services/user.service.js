@@ -1,7 +1,7 @@
 // services/user.service.js
 import User from "../models/user.model.js";
 
-const userService = {
+export const userService = {
   createUser: async ({ email, password }) => {
     if (!email || !password) {
       throw new Error("Email and password are required");
@@ -16,4 +16,9 @@ const userService = {
   },
 };
 
-export default userService;
+export const getAllUsers = async ({ userId }) => {
+  const users = await User.find({
+    _id: { $ne: userId },
+  });
+  return users;
+};

@@ -32,4 +32,10 @@ userRouter.get(
   authMiddlware.authUser,
   userController.logoutController
 );
+
+userRouter.get(
+  "/all",
+  authMiddlware.authUser,
+  userController.getAllUsersController
+);
 export default userRouter;
