@@ -3,6 +3,7 @@ import userModel from "../models/user.model.js";
 import {
   createProjectService,
   getAllProjectByUserId,
+  addUsersToProject,
 } from "../services/project.service.js";
 
 import { validationResult } from "express-validator";
@@ -42,6 +43,32 @@ export const getAllProject = async (req, res) => {
     return res.status(200).json({
       projects: allUserProjects,
     });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+export const addUserToProject = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    const { projectId, users } = req.body;
+
+    const loggedInUser = await userModel.findOne({ email: req.user.email });
+    if (!loggedInUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const updatedProject = await addUsersToProject({
+      projectId,
+      users,
+      userId: loggedInUser._id,
+    });
+
+    return res.status(200).json({ project: updatedProject });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
