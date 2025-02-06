@@ -30,4 +30,10 @@ projectRouter.put(
   projectController.addUserToProject
 );
 
+projectRouter.get(
+  "/get-project/:projectId",
+  authMiddleWare.authUser,
+  projectController.getProjectById
+);
+
 export default projectRouter;

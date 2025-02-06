@@ -4,6 +4,7 @@ import {
   createProjectService,
   getAllProjectByUserId,
   addUsersToProject,
+  getProjectByIdService,
 } from "../services/project.service.js";
 
 import { validationResult } from "express-validator";
@@ -70,6 +71,16 @@ export const addUserToProject = async (req, res) => {
 
     return res.status(200).json({ project: updatedProject });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(400).json({ message: error.message });
+  }
+};
+
+export const getProjectById = async (req, res) => {
+  const { projectId } = req.params;
+  try {
+    const project = await getProjectByIdService({ projectId });
+    return res.status(200).json({ project });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
   }
 };
